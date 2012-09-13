@@ -1,4 +1,10 @@
 Calendar::Application.routes.draw do
+  resources :schedules
+
+  resources :lessons
+
+  resources :clazzs
+
   resources :events
 
   get "calendar/index"

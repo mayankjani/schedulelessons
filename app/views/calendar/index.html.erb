@@ -1,4 +1,17 @@
-<%= link_to "new event", new_event_path %>
+<%#= link_to "new event", new_event_path %>
+
+<div id='external-events'>
+<h4>Draggable Lessons</h4>
+<% @lessons.each do |lesson| %>
+<div class='external-event'><%= lesson.title %></div>
+<% end %>
+<p>
+<input type='checkbox' id='drop-remove' /> <label for='drop-remove'>remove after drop</label>
+</p>
+<p>
+<%= link_to "New Lesson", new_lesson_path %>
+</p>
+</div>
 
 <div id='calendar'></div>
 

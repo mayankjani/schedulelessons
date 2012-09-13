@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Clazz:</b>
+  <%= @schedule.clazz_id %>
+</p>
+
+<p>
+  <b>Lesson:</b>
+  <%= @schedule.lesson_id %>
+</p>
+
+<p>
+  <b>Date:</b>
+  <%= @schedule.date %>
+</p>
+
+<p>
+  <b>Position:</b>
+  <%= @schedule.position %>
+</p>
+
+
+<%= link_to 'Edit', edit_schedule_path(@schedule) %> |
+<%= link_to 'Back', schedules_path %>

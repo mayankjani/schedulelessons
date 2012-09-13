@@ -1,0 +1,21 @@
+<%= form_for(@clazz) do |f| %>
+  <% if @clazz.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@clazz.errors.count, "error") %> prohibited this clazz from being saved:</h2>
+
+      <ul>
+      <% @clazz.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :title %><br />
+    <%= f.text_field :title %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

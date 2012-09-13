@@ -1,0 +1,23 @@
+<h1>Listing clazzs</h1>
+
+<table>
+  <tr>
+    <th>Title</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @clazzs.each do |clazz| %>
+  <tr>
+    <td><%= clazz.title %></td>
+    <td><%= link_to 'Show', clazz %></td>
+    <td><%= link_to 'Edit', edit_clazz_path(clazz) %></td>
+    <td><%= link_to 'Destroy', clazz, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Clazz', new_clazz_path %>

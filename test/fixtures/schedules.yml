@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  clazz_id: 1
+  lesson_id: 1
+  date: 2012-09-12
+  position: 1
+
+two:
+  clazz_id: 1
+  lesson_id: 1
+  date: 2012-09-12
+  position: 1
