@@ -19,19 +19,32 @@
     <%= f.label :description %><br />
     <%= f.text_area :description %>
   </div>
+  
+  <% if !(@lesson.starts_at).nil? %>
   <div class="field">
     <%= f.label :starts_at %><br />
     <%= f.datetime_select :starts_at %>
   </div>
+  <% end %>
+  
+  <% if !(@lesson.ends_at).nil? %>
   <div class="field">
     <%= f.label :ends_at %><br />
     <%= f.datetime_select :ends_at %>
   </div>
+  <% end %>
+  
+  <% if !(@lesson.all_day).nil? %>
   <div class="field">
     <%= f.label :all_day %><br />
     <%= f.check_box :all_day %>
   </div>
+  <% end %>
+  
+  <br />
   <div class="actions">
     <%= f.submit %>
   </div>
+  <br />
+    
 <% end %>

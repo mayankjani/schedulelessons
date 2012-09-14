@@ -13,7 +13,8 @@ $(document).ready(function() {
 		// create an Event Object (http://arshaw.com/fullcalendar/docs/event_data/Event_Object/)
 		// it doesn't need to have a start or end
 		var eventObject = {
-			title: $.trim($(this).text()) // use the element's text as the event title
+			title: $.trim($(this).text()), // use the element's text as the event title
+			id: $(this).attr('id') // use the element's text as the event title
 		};
 		
 		// store the Event Object in the DOM element so we can get to it later
@@ -41,13 +42,24 @@ $(document).ready(function() {
         
 	droppable: true, // this allows things to be dropped onto the calendar !!!
 	drop: function(date, allDay) { // this function is called when something is dropped
-	
+    
 		// retrieve the dropped element's stored Event Object
 		var originalEventObject = $(this).data('eventObject');
 		
+		$.update(
+		"/lessons/" + originalEventObject.id,
+		{ lesson: { 
+				starts_at: "" + date,
+				ends_at: "" + date,
+				all_day: allDay
+			  }
+		},
+			function (reponse) { alert('successfully updated task.'); }
+		);
+	      
 		// we need to copy it, so that multiple events don't have a reference to the same object
 		var copiedEventObject = $.extend({}, originalEventObject);
-		
+
 		// assign it the date that was reported
 		copiedEventObject.start = date;
 		copiedEventObject.allDay = allDay;
@@ -56,12 +68,13 @@ $(document).ready(function() {
 		// the last `true` argument determines if the event "sticks" (http://arshaw.com/fullcalendar/docs/event_rendering/renderEvent/)
 		$('#calendar').fullCalendar('renderEvent', copiedEventObject, true);
 		
+		$(this).remove();
+
 		// is the "remove after drop" checkbox checked?
-		if ($('#drop-remove').is(':checked')) {
-			// if so, remove the element from the "Draggable Events" list
-			$(this).remove();
-		}
-		
+		//if ($('#drop-remove').is(':checked')) {
+			//// if so, remove the element from the "Draggable Events" list
+			//$(this).remove();
+		//}
 	},
 			
         loading: function(bool){
@@ -81,7 +94,7 @@ $(document).ready(function() {
         
         timeFormat: 'h:mm t{ - h:mm t} ',
         dragOpacity: "0.5",
-        
+
         //http://arshaw.com/fullcalendar/docs/event_ui/eventDrop/
         eventDrop: function(event, dayDelta, minuteDelta, allDay, revertFunc){
             updateEvent(event);
@@ -100,6 +113,9 @@ $(document).ready(function() {
 });
 
 function updateEvent(the_event) {
+    if(the_event.end == null)
+    	the_event.end = the_event.start;
+	
     $.update(
       "/lessons/" + the_event.id,
       { lesson: { title: the_event.title,
